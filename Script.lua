@@ -1,0 +1,1 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/jailencyber/Spawnfruit1/main/main.lua"))()
