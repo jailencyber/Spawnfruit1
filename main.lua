@@ -1,32 +1,26 @@
--- main.lua script for spawning a fruit in front of the player in Blox Fruits
+# main.py script for spawning a fruit in front of the player in Blox Fruits
 
--- Print a message to indicate that the script has loaded successfully
-print("main.lua has been loaded successfully.")
+# Print a message to indicate that the script has loaded successfully
+print("main.py has been loaded successfully.")
 
--- Define the function to spawn a fruit
-function spawnFruit(fruitName)
-    -- Get the local player
-    local player = game.Players.LocalPlayer
-    local character = player.Character or player.CharacterAdded:Wait()
-    
-    -- Check if the fruit exists in ServerStorage
-    local fruitModel = game.ServerStorage:FindFirstChild(fruitName)
-    
-    if fruitModel then
-        -- Clone the fruit model
-        local fruitClone = fruitModel:Clone()
+# Define the function to spawn a fruit
+def spawn_fruit(fruit_name):
+    # Get the local player and character
+    player = game.Players.LocalPlayer
+    character = player.Character or player.CharacterAdded:Wait()
 
-        -- Get the player's position and create a spawn position in front of the character
-        local spawnPosition = character.HumanoidRootPart.Position + (character.HumanoidRootPart.CFrame.LookVector * 5)
+    # Get the fruit model from ServerStorage
+    fruit_model = game.ServerStorage:FindFirstChild(fruit_name)
 
-        -- Set the cloned fruit's position
-        fruitClone:SetPrimaryPartCFrame(CFrame.new(spawnPosition))
+    # Check if the fruit exists
+    if fruit_model:
+        # Clone the fruit model and set its position
+        fruit_clone = fruit_model:Clone()
+        fruit_clone:SetPrimaryPartCFrame(character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 5))
 
-        -- Parent the fruit to the workspace
-        fruitClone.Parent = workspace
+        # Parent the fruit to the workspace
+        fruit_clone.Parent = workspace
 
-        print(fruitName .. " has been spawned in front of the player.")
-    else
-        print("Error: The fruit " .. fruitName .. " does not exist in ServerStorage.")
-    end
-end
+        print(f"{fruit_name} has been spawned in front of the player.")
+    else:
+        print(f"Error: The fruit {fruit_name} does not exist in ServerStorage.")
